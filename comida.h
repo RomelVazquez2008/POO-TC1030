@@ -1,0 +1,72 @@
+#ifndef COMIDA_H_INCLUDED
+#define COMIDA_H_INCLUDED
+
+#include <iostream>
+using namespace std;
+
+class Comida{
+  private:
+    //ATRIBUTOS
+    string sopa;
+    string plato_fuerte;
+    string bebida;
+    string postre;
+    float precio;
+  public:
+    //CONSTRUCTORES
+    Comida();
+    Comida(string nuevo_sopa, string nuevo_plato_fuerte, string nuevo_bebida, string nuevo_postre, float nuevo_precio);
+    //DESTRUCTOR
+    ~Comida();
+    //METODOS
+    void consultar_menu();
+    //GETTERS
+    string get_sopa();
+    float get_precio();
+};
+
+//CONSTRUCTOR DEFAULT
+Comida::Comida(){
+    sopa="";
+    plato_fuerte="";
+    bebida="";
+    postre="";
+    precio=0;
+}
+
+//CONSTRUCTOR CON ATRIBUTOS
+Comida::Comida(string nuevo_sopa, string nuevo_plato_fuerte, string nuevo_bebida, string nuevo_postre, float nuevo_precio){
+    sopa=nuevo_sopa;
+    plato_fuerte=nuevo_plato_fuerte;
+    bebida=nuevo_bebida;
+    postre=nuevo_postre;
+    precio=nuevo_precio;
+}
+
+//DESTRUCTOR
+Comida::~Comida(){
+}
+
+//METODO QUE IMPRIME TODO EL MENU
+void Comida::consultar_menu(){
+    cout<<"El menu incluye:"<<endl;
+    cout<<sopa<<endl;
+    cout<<plato_fuerte<<endl;
+    cout<<bebida<<endl;
+    cout<<postre<<endl;
+    cout<<"Tiene un precio de: $"<<precio<<endl;
+}
+
+
+//GETTERS
+string Comida::get_sopa(){
+    return sopa;
+}
+
+float Comida::get_precio(){
+    return precio;
+}
+
+
+
+#endif // COMIDA_H_INCLUDED
