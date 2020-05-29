@@ -5,23 +5,32 @@
 using namespace std;
 #include "Orden.h"
 #include "comida.h"
+#include "chef.h"
 //ESTA CLASE HEREDA DE LA CLASE EMPLEADO
 class Mesero: public Empleado{
     private:
         //ATRIBUTOS
         Orden orde[20];
         int indice_orden;
+        Chef copia_chef;
+        //METIMOS ESTA CLASE AQUÍ PARA QUE GUARDE LAS ORDENES DEL MESERO, Y LUEGO PASEN AL CHEF ORIGINAL
     public:
         //CONSTRUCTORES
         Mesero ();
         Mesero (string nuevo_nombre, int nuevo_turno);
         //DESTRUCTOR
         ~Mesero();
+        //SETTER
+        void set_orden(int nuevo_numero_orden);
+        //GETTERS
+        int get_numero();
+        Chef get_copia_chef();
         //METODOS
         void descripcion();
         void agregar_comida_en_orden(int indice, Comida nuevo_comida[100]);
-        //SETTER
-        void set_orden(int nuevo_numero_orden);
+        void copiar_datos_chef(Chef nuevo_chef);
+        void atender_orden(int indice);
+
 };
 //CONSTRUCTOR DEFAULT
 Mesero::Mesero():Empleado(){
@@ -43,6 +52,16 @@ void Mesero::set_orden(int nuevo_numero_orden){
     indice_orden++;
 }
 
+//GETTERS
+Chef Mesero::get_copia_chef(){
+    return copia_chef;
+}
+
+int Mesero::get_numero(){
+    return copia_chef.get_indice_comid();
+}
+
+
 //METODO DE SOBREESCRITURA, QUE IMPRIME LOS ATRIBUTOS DE LAS CLASE
 void Mesero::descripcion(){
     cout<<"Soy un Mesero"<<endl;
@@ -60,6 +79,42 @@ void Mesero::descripcion(){
 //METODO QUE AYUDA AL ATRIBUTO ORDEN, A AGREGAR COMIDA EN LA ORDEN
 void Mesero::agregar_comida_en_orden(int indice, Comida nuevo_comida[100]){
     orde[indice].agregar_comida(nuevo_comida);
+    orde[indice].calcular_total();
 }
+
+//METODO QUE INVOLUCRA POLIMORFISMO, PARA QUE EL MESERO SEPA DISTRIBUIR LOS PEDIDOS
+void Mesero::atender_orden(int indice){
+    if (orde[indice].get_estado()==0){
+        for (int j=0;j<100;j++){
+            if(orde[indice].get_comida(j).get_precio()==0){
+                break;
+            }
+            else{
+                copia_chef.copiar_comida(orde[indice].get_comida(j));
+            }
+        }
+        cout<<"Mesero: Entregada orden a chef"<<endl;
+        orde[indice].completar_orden();
+    }
+    else{
+        cout<<"Mesero: Entregando orden a cliente"<<endl;
+    }
+}
+
+//METODO TODAVIA NO TERMINADO, DONDE EL CHEF DE ESTA CLASE, PUEDE COPIARSE A UN CHEF EXTERNO
+void Mesero::copiar_datos_chef(Chef nuevo_chef){
+    for (int j=0;j<100;j++){
+            if(copia_chef.get_comid(j).get_precio()==0){
+                break;
+            }
+            else{
+                nuevo_chef.set_comid(copia_chef.get_comid(j),j);
+                nuevo_chef.set_indice_comid(j);
+            }
+}
+}
+
+
+
 
 #endif // MESERO_H_INCLUDED

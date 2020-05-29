@@ -22,6 +22,9 @@ class Comida{
     void consultar_menu();
     //GETTERS
     string get_sopa();
+    string get_plato_fuerte();
+    string get_bebida();
+    string get_postre();
     float get_precio();
 };
 
@@ -65,6 +68,18 @@ string Comida::get_sopa(){
 
 float Comida::get_precio(){
     return precio;
+}
+
+string Comida::get_bebida(){
+    return bebida;
+}
+
+string Comida::get_plato_fuerte(){
+    return plato_fuerte;
+}
+
+string Comida::get_postre(){
+    return postre;
 }
 
 

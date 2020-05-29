@@ -17,9 +17,9 @@ class Empleado{
     //DESTRUCTOR
     ~Empleado();
     //METODOS
-    void atender_orden();
+    virtual void atender_orden(int indice);
     void cambiar_turno();
-    void descripcion();
+    virtual void descripcion();
     //GETTERS
     string get_nombre();
     bool get_turno();
@@ -38,9 +38,9 @@ Empleado::Empleado(string nuevo_nombre, bool nuevo_turno){
 Empleado::~Empleado(){
 }
 
-//METODO NO IMPLMENTADO, PERO SERÁ CUBIERTO EN LA ENTREGA DE POLIMORFISMO
-void Empleado::atender_orden(){
-
+//METODO DE POLIMORFISMO VACIO, SOLO SE CREÒ PARA QUE PUEDA INTERACTURAR CON LAS DEMÀS CLASES
+void Empleado::atender_orden(int indice){
+cout<<"Metodo vacio por polimorfismo";
 }
 
 //METODO QUE CAMBIA EL TURNO ACTUAL DEL EMPLEADO
@@ -53,7 +53,7 @@ void Empleado::cambiar_turno(){
     }
 }
 
-//METODO DE SOBREESCRITURA, QUE IMPRIME LOS ATRIBUTOS DE LAS CLASE
+//METODO DE SOBREESCRITURA Y POLIMORFISMO, QUE IMPRIME LOS ATRIBUTOS DE LAS CLASE
 void Empleado::descripcion(){
     cout<<"Soy un empleado"<<endl;
     cout<<"Me llamo: "<<Empleado::get_nombre()<<endl;

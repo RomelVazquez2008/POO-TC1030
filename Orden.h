@@ -25,8 +25,10 @@ class Orden{
     void completar_orden();
     void calcular_total();
     void agregar_comida(Comida nuevo_comid[100]);
-    //GETTER
+    //GETTERS
     float get_total();
+    bool get_estado();
+    Comida get_comida(int i);
 };
 //CONSTRUCTOR CON ATRIBUTOS
 Orden::Orden(int nuevo_numero_orden){
@@ -65,14 +67,27 @@ void Orden::calcular_total(){
 
 //METODO QUE AGREGA ALIMENTOS A LA ORDEN
 void Orden::agregar_comida(Comida nuevo_comid[100]){
-    for(indice_comid;indice_comid<sizeof(nuevo_comid);indice_comid++){
+    for(indice_comid;indice_comid<100;indice_comid++){
+        if (nuevo_comid[indice_comid].get_precio()==0){
+            break;
+        }
+        else{
         comid[indice_comid]=nuevo_comid[indice_comid];
+        }
     }
 }
 
-//GETTER
+//GETTERS
 float Orden::get_total(){
     return total;
+}
+
+bool Orden::get_estado(){
+    return estado;
+}
+
+Comida Orden::get_comida(int i){
+    return comid[i];
 }
 
 #endif // ORDEN_H_INCLUDED
