@@ -52,7 +52,6 @@ Comida::~Comida(){
 
 //METODO QUE IMPRIME TODO EL MENU
 void Comida::consultar_menu(){
-    cout<<"El menu incluye:"<<endl;
     cout<<sopa<<endl;
     cout<<plato_fuerte<<endl;
     cout<<bebida<<endl;

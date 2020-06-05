@@ -25,11 +25,14 @@ class Mesero: public Empleado{
         //GETTERS
         int get_numero();
         Chef get_copia_chef();
+        Orden get_orden(int indice);
+        int get_indice_orden();
         //METODOS
         void descripcion();
         void agregar_comida_en_orden(int indice, Comida nuevo_comida[100]);
-        void copiar_datos_chef(Chef nuevo_chef);
+        void copiar_datos_chef(Chef* nuevo_chef);
         void atender_orden(int indice);
+        void incrementar_indice_orden();
 
 };
 //CONSTRUCTOR DEFAULT
@@ -59,6 +62,10 @@ Chef Mesero::get_copia_chef(){
 
 int Mesero::get_numero(){
     return copia_chef.get_indice_comid();
+}
+
+int Mesero::get_indice_orden(){
+    return indice_orden;
 }
 
 
@@ -102,19 +109,24 @@ void Mesero::atender_orden(int indice){
 }
 
 //METODO TODAVIA NO TERMINADO, DONDE EL CHEF DE ESTA CLASE, PUEDE COPIARSE A UN CHEF EXTERNO
-void Mesero::copiar_datos_chef(Chef nuevo_chef){
+void Mesero::copiar_datos_chef(Chef* nuevo_chef){
     for (int j=0;j<100;j++){
             if(copia_chef.get_comid(j).get_precio()==0){
                 break;
             }
             else{
-                nuevo_chef.set_comid(copia_chef.get_comid(j),j);
-                nuevo_chef.set_indice_comid(j);
+                nuevo_chef->set_comid(copia_chef.get_comid(j),j);
             }
+    }
+    nuevo_chef->set_indice_comid(copia_chef.get_indice_comid());
 }
+
+Orden Mesero::get_orden(int indice){
+    return orde[indice];
 }
 
-
-
+void Mesero::incrementar_indice_orden(){
+    indice_orden++;
+}
 
 #endif // MESERO_H_INCLUDED

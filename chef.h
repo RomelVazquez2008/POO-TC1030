@@ -8,8 +8,8 @@ using namespace std;
 //CLASE QUE HEREDA DE LA CLASE EMPLEADO
 class Chef: public Empleado{
     private:
-    Comida comid[100];
-    int indice_comid;
+        Comida comid[100];
+        int indice_comid;
     public:
         //CONSTRUCTORES
         Chef ();
@@ -78,6 +78,7 @@ int Chef::get_indice_comid(){
 void Chef::set_indice_comid(int nuevo_indice){
     indice_comid=nuevo_indice;
 }
+
 void Chef::set_comid(Comida nuevo_comid, int nuevo_indice){
     comid[nuevo_indice]=nuevo_comid;
 }
